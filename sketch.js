@@ -1,17 +1,26 @@
-let miPelota;
-let frutas = ['mazana', miPelota, 234, 'granadilla'];
-
+let t = 0;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-	miPelota = new Pelota();
+	// noLoop();
+	rectMode(CENTER);
 }
-//     >>=>
+// >>=====> DRAW <=====<<
 function draw() {
-	background(255);
-	for (let x = 0; x < mouseX; x += mouseY + 10) {
-		square(x, 50, 5);
+	background(163, 99, 252);
+	noStroke();
+	let anchura = 30;
+	let gap = 20;
+
+	for (let x = anchura; x < windowWidth - anchura; x += anchura + gap) {
+		for (let y = anchura; y < windowHeight - anchura; y += anchura + gap) {
+			fill(47, 255, 255);
+			square(
+				x,
+				y,
+				anchura + map(noise(x / 1000, y / 1000, t), 0, 1, -40, 40)
+			);
+		}
 	}
-	// circle(mouseX, mouseY, 20);
-	// miPelota.update(300);
-	// miPelota.display();
+
+	t += 0.005;
 }
